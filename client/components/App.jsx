@@ -1,12 +1,12 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import {Route, Link, Switch } from 'react-router-dom'
 // import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import SkiResorts from './Skiing/SkiResorts'
 import SearchBar from './Skiing/SearchBar'
 import Header from './Skiing/Header'
 import AccomRoutes from './Accom/AccomRoutes'
 // import Background from './Skiing/Background'
-
+import Weather from './Weather'
 
 class App extends React.Component {
   render () {
@@ -16,9 +16,14 @@ class App extends React.Component {
         {/* <Background /> */}
         <div className='component' >
           <Header />
-          <SearchBar />
-          <SkiResorts />
-          <AccomRoutes />
+          <Switch>
+            <Route path="/view" component={(props) => <AccomRoutes {...props }/>} />
+            <Route exact path='/' component={(props) => <div>
+              <SearchBar />
+              <SkiResorts />
+            </div>} />
+            <Route path="/weather" component={Weather} />
+          </Switch>
         </div>
       </div>
 
@@ -27,5 +32,3 @@ class App extends React.Component {
 }
 
 export default App
-
-{/* <img src='https://images.pexels.com/photos/300857/pexels-photo-300857.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb' className="image"/> */}
